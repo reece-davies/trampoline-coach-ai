@@ -53,7 +53,7 @@ Maintain a professional coaching tone and always be concise, practical, and dire
 
 ---
 
-## Run and Deploy Your AI Studio App
+## Run AI Studio App Locally
 
 This repository contains everything you need to run the Trampoline Coach AI locally.
 
@@ -72,9 +72,7 @@ This repository contains everything you need to run the Trampoline Coach AI loca
 Create a `.env.local` file in the project root.
 Set the `API_KEY` in [.env.local](.env.local) to your Gemini API key
 
-
 4. Run the app locally: `npm run dev`
-
 
 5. Open in browser:
 Visit http://localhost:3000 to start chatting with your AI trampoline coach.
