@@ -57,11 +57,6 @@ Maintain a professional coaching tone and always be concise, practical, and dire
 
 This repository contains everything you need to run the Trampoline Coach AI locally.
 
-### Prerequisites
-
-- Node.js (recommended v18+)
-- A valid GEMINI_API_KEY (Google Generative AI / PaLM API key)
-
 ### Setup
 
 1. Install dependencies:
