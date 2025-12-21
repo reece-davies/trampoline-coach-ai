@@ -1,0 +1,91 @@
+skill,notation,difficulty,description
+Tuck Jump,o,0.1,Straight jump with a tuck shape at the top of the bounce
+Straddle Jump,v,0.1,Straight jump with a straddle shape at the top of the bounce
+Pike Jump,<,0.1,Straight jump with a pike shape at the top of the bounce
+Seat Landing,0S,0.1,Landing in seated position on the trampoline. Twists can be then be done to and from this position
+Front Landing,10F,0.1,"From feet, landing on you front, straight, fingertips touching under your chin and legs bent at the knees. Twists can be done to and from this"
+Back Landing,10B,0.1,"From feet, landing on your back with your feet together in the air, almost vertical. Twists can be done to and from this position."
+Swivel Hips,01S,0.1,Seat landing 1/2 twist to seat landing
+Half-Twist Jump,01/,0.1,Feet to feet jump with a 180 degree twist – start facing one way and jump so feet and upper body land facing the opposite direction
+Full Twist Jump,02/,0.2,Feet to feet jump with a 360 twist – turn all the way around to start and finish facing in the same direction
+Back Pullover to feet,30F,0.3,"Starting from back landing, somersault backwards over your head landing on feet"
+Seat Roller,02S,0.2,Seat landing full twist to seat landing
+Cat Twist,02B,0.2,Back landing full twist to back landing
+Cradle,11/,0.2,Back landing 1/2 twist to back landing
+Corkscrew,13/,0.4,"Back landing, 1 & 1/2 twist to back landing"
+Rob-Roy,15/,0.6,"Back landing, 2 & 1/2 twist to back landing"
+Front Somersault Tuck (Front S/S Tuck),40o,0.5,"Jump from feet, rotating forwards over your head, landing on your feet again (360 degrees rotation), can be performed tucked, piked, and straight"
+Front Somersault Pike (Front S/S Pike),40<,0.6,"Jump from feet, rotating forwards over your head, landing on your feet again (360 degrees rotation), can be performed tucked, piked, and straight"
+Front Somersault Straight (Front S/S Straight),40/,0.6,"Jump from feet, rotating forwards over your head, landing on your feet again (360 degrees rotation), can be performed tucked, piked, and straight"
+Back Somersault Tuck (Back S/S Tuck),40o,0.5,"Jump from feet, rotating backwards over your head, landing on your feet again (360 degrees rotation), can be performed tucked, piked, and straight"
+Back Somersault Pike (Back S/S Pike),40<,0.6,"Jump from feet, rotating backwards over your head, landing on your feet again (360 degrees rotation), can be performed tucked, piked, and straight"
+Back Somersault Straight (Back S/S Straight),40/,0.6,"Jump from feet, rotating backwards over your head, landing on your feet again (360 degrees rotation), can be performed tucked, piked, and straight"
+Back Somersault to Seat Tuck,40oS,0.5,"Back somersault landing in seat landing. Can be performed tucked, piked or straight"
+Back Somersault to Seat Pike,40<S,0.6,
+Back Somersault to Seat Straight,40/S,0.6,"Back somersault landing in seat landing. Can be performed tucked, piked or straight"
+Barani Tuck,41o,0.6,"Front Somersault with a 1/2 twist. Can be performed tucked, piked and straight"
+Barani Pike,41<,0.6,"Front Somersault with a 1/2 twist. Can be performed tucked, piked and straight"
+Barani Straight,41/,0.6,"Front Somersault with a 1/2 twist. Can be performed tucked, piked and straight"
+Straight 3/4 Front S/S,30/,0.3,"3/4 straight forward
+somersault (270 degree rotation) from feet, landing in back landing."
+Straight 3/4 Back S/S,30/,0.3,"3/4 straight back somersault from feet, landing in front landing"
+Tuck Bounce Roll / Dolphin / Porpoise,40o,0.5,"From back landing, forward somersault landing in back landing (360 degree rotation)"
+Pike Bounce Roll / Dolphin / Porpoise,40<,0.6,"From back landing, forward somersault landing in back landing (360 degree rotation)"
+Back Cody Tuck,50o,0.5,1 & 1/4 back somersault from front landing over to feet landing (often performed following a Straight 3/4 Back S/S)
+Back Cody Pike,50<,0.7,1 & 1/4 back somersault from front landing over to feet landing (often performed following a Straight 3/4 Back S/S)
+Back Cody Straight,50/,0.7,1 & 1/4 back somersault from front landing over to feet landing (often performed following a Straight 3/4 Back S/S)
+Ball-Out Tuck,50o,0.6,1 & 1/4 front somersault from back landing over to feet landing (often performed following a Straight 3/4 Front S/S
+Ball-Out Pike,50<,0.7,1 & 1/4 front somersault from back landing over to feet landing (often performed following a Straight 3/4 Front S/S
+Ball-out Barani Tuck,51o,0.7,"Ball-Out with a late 1/2 twist. Can be performed tucked, piked and straight"
+Ball-out Barani Pike,51<,0.7,"Ball-Out with a late 1/2 twist. Can be performed tucked, piked and straight"
+Ball-out Barani Straight,51/,0.7,"Ball-Out with a late 1/2 twist. Can be performed tucked, piked and straight"
+Ball-Out Rudi Straight,53/,0.9,Ball-Out with 1 & 1/2 twists
+Half-Out Ball-Out Tuck,901o,1.2,"Ball-Out with 2 & 1/4 somersaults, with half twist towards the end (in the 2nd somersault)"
+Half-Out Ball-Out Pike,901<,1.4,"Ball-Out with 2 & 1/4 somersaults, with half twist towards the end (in the 2nd somersault)"
+Half-Out Ball-Out Straight,901/,1.4,"Ball-Out with 2 & 1/4 somersaults, with half twist towards the end (in the 2nd somersault)"
+Full Back,42/,0.7,Full-Twisting Straight Back Somersault
+Rudolph / Rudi / Rudy,43/,0.8,Straight front somersault with 1 & 1/2 twists
+Double-Full,44/,0.9,Straight back somersault with 2 twists
+Randi / Randy,45/,1,Straight front somersault with 2 & 1/2 twists
+Adolph,57/,1.2,Straight front somersault with 3 & 1/2 twists
+1 & 3/4 Front S/S Tuck (aka. 1 & 3 Tuck),700o,0.8,1 & 3/4 front somersault landing in back landing
+1 & 3/4 Front S/S Pike (aka. 1 & 3 Pike),700<,0.9,1 & 3/4 front somersault landing in back landing
+1 & 3/4 Front S/S Straight (aka. 1 & 3 Straight),700/,0.9,1 & 3/4 front somersault landing in back landing
+Double Back Somersault Tuck,800o,1.1,Back somersault with 2 full rotations (720 degree rotation)
+Double Back Somersault Pike,800<,1.3,Back somersault with 2 full rotations (720 degree rotation)
+Double Back Somersault Straight,800/,1.3,Back somersault with 2 full rotations (720 degree rotation)
+Half-In Back-Out Tuck,810o,1.1,"Double somersault, starts taking off forwards with a 1/2 twist during the first rotation, therefore finishes somersaulting backwards"
+Half-In Back-Out Pike,810<,1.3,"Double somersault, starts taking off forwards with a 1/2 twist during the first rotation, therefore finishes somersaulting backwards"
+Half-In Back-Out Straight,810/,1.3,"Double somersault, starts taking off forwards with a 1/2 twist during the first rotation, therefore finishes somersaulting backwards"
+Half-Out Fliffis Tuck (Half Out Tuck),801o,1.1,Double front somersault with a 1/2 twist during the second somersault
+Half-Out Fliffis Pike (Half Out Pike),801<,1.3,Double front somersault with a 1/2 twist during the second somersault
+Half-Out Fliffis Straight (Half Out Straight),801/,1.3,Double front somersault with a 1/2 twist during the second somersault
+Half-In Half-Out Tuck,811o,1.3,Double back somersault with 1/2 twist during the first rotation and another 1/2 twist during the second rotation
+Half-In Half-Out Pike,811<,1.5,Double back somersault with 1/2 twist during the first rotation and another 1/2 twist during the second rotation
+Half-In Half-Out Straight,811/,1.5,Double back somersault with 1/2 twist during the first rotation and another 1/2 twist during the second rotation
+(Back-In) Full-Out Tuck,802o,1.3,Double back somersault with a full twist during the second somersault
+(Back-In) Full-Out Pike,802<,1.5,Double back somersault with a full twist during the second somersault
+(Back-In) Full-Out Straight,802/,1.5,Double back somersault with a full twist during the second somersault
+Full-In Half-Out Tuck,821o,1.3,Double front somersault with a full twist in the first rotation and a 1/2 twist in the second rotation
+Full-In Half-Out Pike,821<,1.5,Double front somersault with a full twist in the first rotation and a 1/2 twist in the second rotation
+Full-In Half-Out Straight,821/,1.5,Double front somersault with a full twist in the first rotation and a 1/2 twist in the second rotation
+Rudi-Out Tuck,803o,1.3,Double front somersault with 1 & 1/2 twists during the second somersault
+Rudi-Out Pike,803<,1.5,Double front somersault with 1 & 1/2 twists during the second somersault
+Full-In Full-Out (aka. Full Full),803/,1.7,Double back somersault with full twist in the first somersault and another full twist in the second somersault
+One and Half-In Half-Out Tuck,831o,1.5,Double back somersault with 1 & 1/2 twist in the first somersault and another 1/2 twist in the second somersault
+One and Half-In Half-Out Pike,831<,1.7,Double back somersault with 1 & 1/2 twist in the first somersault and another 1/2 twist in the second somersault
+Half-In Rudi-Out Tuck,813o,1.5,Double back somersault with 1/2 twist during the first rotation and another 1 &1/2 twist during the second rotation
+Half-In Rudi-Out Pike,813<,1.7,Double back somersault with 1/2 twist during the first rotation and another 1 &1/2 twist during the second rotation
+Full-In Rudi-Out,823/,1.7,Double front somersault with a full twist in the first rotation and a 1 & 1/2 twist in the second rotation
+Miller,833/,2.1,Double back somersault with 1 & 1/2 twists in the first somersault and 1 & 1/2 twists in the second somersault
+Killer / Poliarush / Miller Plus,844/,2.5,Double back somersault with 2 full twists in the first somersault and 2 full twists in the second somersault
+Triple Back Somersault Tuck,12000o,1.8,Back Somersault with 3 rotations (1080 degrees rotation)
+Triple Back Somersault Pike,12000<,2.1,Back Somersault with 3 rotations (1080 degrees rotation)
+Half-Out Triffis Tuck (Triff Tuck),12001o,1.7,Triple front somersault with 1/2 twist during the third somersault
+Half-Out Triffis Pike (Triff Pike),12001<,2,Triple front somersault with 1/2 twist during the third somersault
+Half-In Half-Out Triffis Tuck,12101o,2,Triple back somersault with a half twist into the first somersault and a half twist out of the third somersault
+Half-In Half-Out Triffis Pike,12101<,2.3,Triple back somersault with a half twist into the first somersault and a half twist out of the third somersault
+Rudi-Out Triffis Tuck (Triff Rudi Out Tuck),12003o,2.1,Triple front somersault with 1 & 1/2 twist during the third somersault
+Rudi-Out Triffis Pike (Triff Rudi Out Pike),12003<,2.4,Triple front somersault with 1 & 1/2 twist during the third somersault
+Quadruple Back Somersault Tuck,160000o,2.5,Back Somersault with 4 rotations (1440 degrees rotation)
+Quadruple Back Somersault Pike,160000<,2.9,Back Somersault with 4 rotations (1440 degrees rotation)
