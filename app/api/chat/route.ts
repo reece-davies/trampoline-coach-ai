@@ -1,7 +1,26 @@
-
 import { GoogleGenAI, Chat, Content } from "@google/genai";
-import type { GeminiMessage } from '@/types';
-import { findRelevantSkills } from "@/lib/skills";
+import type { GeminiMessage } from "@/types";
+import { findRelevantSkills, loadSkills } from "@/lib/skills";
+
+/**
+ * Detect questions that require reasoning across the entire skill dataset
+ * (e.g. highest / lowest / compare / hardest)
+ */
+function needsAllSkills(question: string): boolean {
+  const q = question.toLowerCase();
+
+  return (
+    q.includes("highest") ||
+    q.includes("lowest") ||
+    q.includes("most difficult") ||
+    q.includes("least difficult") ||
+    q.includes("hardest") ||
+    q.includes("easiest") ||
+    q.includes("compare") ||
+    q.includes("difference") ||
+    q.includes("which skill")
+  );
+}
 
 const SYSTEM_INSTRUCTION = `
 You are a world-class AI assistant and expert trampoline gymnastics coach.
@@ -25,10 +44,13 @@ SOURCE PRIORITY (must follow strictly)
    - General procedural guidance
 3. Do NOT provide FIG difficulty values or fig notation.
 
+ANALYSIS RULE
+- You MAY compare, rank, and analyze difficulty values when multiple skills are provided.
+
 STRICT RULES
-- If a skill is not listed in the SKILL INFORMATION, use the code of points to find said skill. Not all skills have been listed in the provided skills dataset.
-- Do NOT infer, estimate, or guess skill difficulty or notation, if not stated otherwise in the provided skill dataset.
-- Do NOT invent skills or values. Only use what's provided.
+- If a skill is not listed in the SKILL INFORMATION, use the code of points to find said skill.
+- Do NOT infer, estimate, or guess skill difficulty or notation if not stated.
+- Do NOT invent skills or values.
 
 ANSWER STYLE
 - For technical skill questions: explain execution and coaching points only when relevant.
@@ -45,41 +67,56 @@ const ai = new GoogleGenAI({ apiKey });
 
 export async function POST(req: Request) {
   try {
-    const { message, history } = (await req.json()) as { message: string; history: GeminiMessage[] };
+    const { message, history } = (await req.json()) as {
+      message: string;
+      history: GeminiMessage[];
+    };
 
     const chat: Chat = ai.chats.create({
-      model: 'gemini-2.5-flash',
+      model: "gemini-2.5-flash",
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
         temperature: 0.7,
       },
       history: history as Content[],
     });
-    
-    // Original Gemini message code
-    //const result = await chat.sendMessageStream({ message });
 
-    const matchedSkills = findRelevantSkills(message);
+    // Original Gemini message code
+    // const result = await chat.sendMessageStream({ message });
+
+    /**
+     * Decide whether to:
+     * - Provide ALL skills (analytical questions)
+     * - OR only matched skills (specific skill questions)
+     */
+    const matchedSkills = needsAllSkills(message)
+      ? loadSkills()
+      : findRelevantSkills(message);
 
     const skillContext = matchedSkills.length
-      ? matchedSkills.map(s => `
-    • **${s.skill}**
-      - Notation: ${s.notation}
-      - Difficulty: ${s.difficulty}
-      - Description: ${s.description}
-    `).join("\n")
+      ? matchedSkills
+          .map(
+            (s) => `
+• **${s.skill}**
+  - Notation: ${s.notation}
+  - Difficulty: ${s.difficulty}
+  - Description: ${s.description}
+`
+          )
+          .join("\n")
       : "No relevant skill information found.";
 
     const groundedMessage = `
-    SKILL INFORMATION (authoritative):
-    ${skillContext}
+SKILL INFORMATION (authoritative):
+${skillContext}
 
-    USER QUESTION:
-    ${message}
-    `;
+USER QUESTION:
+${message}
+`;
 
+    // Send grounded message to Gemini (user never sees this)
     const result = await chat.sendMessageStream({
-      message: groundedMessage
+      message: groundedMessage,
     });
     // end of input
 
@@ -96,15 +133,16 @@ export async function POST(req: Request) {
     });
 
     return new Response(stream, {
-      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+      headers: { "Content-Type": "text/plain; charset=utf-8" },
     });
-
   } catch (error) {
-    console.error('Error in chat API:', error);
-    const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+    console.error("Error in chat API:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "An unknown error occurred";
+
     return new Response(JSON.stringify({ error: errorMessage }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     });
   }
 }
