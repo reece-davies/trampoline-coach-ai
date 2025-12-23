@@ -38,10 +38,39 @@ export function loadSkills(): Skill[] {
   return cachedSkills;
 }
 
-// Find skills mentioned in a question (case-insensitive substring match).
+// Find skills mentioned in a question (case-insensitive substring match). (Obsolete)
+/*
 export function findRelevantSkills(question: string): Skill[] {
   const skills = loadSkills();
   const q = question.toLowerCase();
 
   return skills.filter((s) => q.includes(s.skill.toLowerCase()));
+} */
+
+  function normalize(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/\(.*?\)/g, "") // remove parenthetical text
+    .replace(/[^a-z0-9\s]/g, "") // remove punctuation
+    .trim();
+}
+
+export function findRelevantSkills(question: string): Skill[] {
+  const skills = loadSkills();
+  const q = normalize(question);
+
+  return skills.filter((s) => {
+    const skillName = normalize(s.skill);
+
+    // Extract aliases inside parentheses, e.g. "(Triff Pike)"
+    const aliases =
+      s.skill.match(/\((.*?)\)/g)?.map(a =>
+        normalize(a.replace(/[()]/g, ""))
+      ) ?? [];
+
+    return (
+      q.includes(skillName) ||
+      aliases.some(alias => q.includes(alias))
+    );
+  });
 }

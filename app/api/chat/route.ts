@@ -93,26 +93,40 @@ export async function POST(req: Request) {
       ? loadSkills()
       : findRelevantSkills(message);
 
+
+    // HARD SAFETY: Do not allow definitions without authoritative data
+    if (
+      matchedSkills.length === 0 &&
+      !needsAllSkills(message)
+    ) {
+      return new Response(
+        "I don’t have authoritative skill information for that skill in the current dataset. Please check the skill name or ask about a listed skill.",
+        {
+          headers: { "Content-Type": "text/plain; charset=utf-8" },
+        }
+      );
+    }
+
     const skillContext = matchedSkills.length
       ? matchedSkills
           .map(
             (s) => `
-• **${s.skill}**
-  - Notation: ${s.notation}
-  - Difficulty: ${s.difficulty}
-  - Description: ${s.description}
-`
+    • **${s.skill}**
+      - Notation: ${s.notation}
+      - Difficulty: ${s.difficulty}
+      - Description: ${s.description}
+    `
           )
           .join("\n")
       : "No relevant skill information found.";
 
     const groundedMessage = `
-SKILL INFORMATION (authoritative):
-${skillContext}
+    SKILL INFORMATION (authoritative):
+    ${skillContext}
 
-USER QUESTION:
-${message}
-`;
+    USER QUESTION:
+    ${message}
+    `;
 
     // Send grounded message to Gemini (user never sees this)
     const result = await chat.sendMessageStream({
