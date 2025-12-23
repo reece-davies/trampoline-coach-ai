@@ -1,6 +1,7 @@
 
 import { GoogleGenAI, Chat, Content } from "@google/genai";
 import type { GeminiMessage } from '@/types';
+import { findRelevantSkills } from "@/lib/skills";
 
 const SYSTEM_INSTRUCTION = `
 You are a world-class AI assistant and expert trampoline gymnastics coach.
@@ -57,7 +58,63 @@ export async function POST(req: Request) {
       history: history as Content[],
     });
     
-    const result = await chat.sendMessageStream({ message });
+    // Original Gemini message code
+    //const result = await chat.sendMessageStream({ message });
+    const matchedSkills = findRelevantSkills(message);
+
+    const skillContext = matchedSkills.length
+      ? matchedSkills.map(s => `
+    • **${s.skill}**
+      - Notation: ${s.notation}
+      - Difficulty: ${s.difficulty}
+      - Description: ${s.description}
+    `).join("\n")
+      : "No relevant skill information found.";
+    const skillContext = matchedSkills.length
+      ? matchedSkills.map(s => `
+    • **${s.skill}**
+      - Notation: ${s.notation}
+      - Difficulty: ${s.difficulty}
+      - Description: ${s.description}
+    `).join("\n")
+      : "No relevant skill information found.";
+    const skillContext = matchedSkills.length
+      ? matchedSkills.map(s => `
+    • **${s.skill}**
+      - Notation: ${s.notation}
+      - Difficulty: ${s.difficulty}
+      - Description: ${s.description}
+    `).join("\n")
+      : "No relevant skill information found.";
+    const skillContext = matchedSkills.length
+      ? matchedSkills.map(s => `
+    • **${s.skill}**
+      - Notation: ${s.notation}
+      - Difficulty: ${s.difficulty}
+      - Description: ${s.description}
+    `).join("\n")
+      : "No relevant skill information found.";
+    const skillContext = matchedSkills.length
+      ? matchedSkills.map(s => `
+    • **${s.skill}**
+      - Notation: ${s.notation}
+      - Difficulty: ${s.difficulty}
+      - Description: ${s.description}
+    `).join("\n")
+      : "No relevant skill information found.";
+
+    const groundedMessage = `
+    SKILL INFORMATION (authoritative):
+    ${skillContext}
+
+    USER QUESTION:
+    ${message}
+    `;
+
+    const result = await chat.sendMessageStream({
+      message: groundedMessage
+    });
+    // end of input
 
     const stream = new ReadableStream({
       async start(controller) {
