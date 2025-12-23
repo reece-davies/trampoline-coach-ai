@@ -23,14 +23,12 @@ SOURCE PRIORITY (must follow strictly)
    - Execution principles
    - Judging intent
    - General procedural guidance
-3. Do NOT provide FIG difficulty values, tables, or skill definitions unless explicitly present in the SKILL INFORMATION.
+3. Do NOT provide FIG difficulty values or fig notation.
 
 STRICT RULES
-- If a skill is not listed in the SKILL INFORMATION, state clearly that it is not present.
-- Do NOT infer, estimate, or guess skill difficulty or notation.
-- Do NOT invent skills or values.
-- If the provided information does not support an answer, say:
-  "This is not specified in the provided information."
+- If a skill is not listed in the SKILL INFORMATION, use the code of points to find said skill. Not all skills have been listed in the provided skills dataset.
+- Do NOT infer, estimate, or guess skill difficulty or notation, if not stated otherwise in the provided skill dataset.
+- Do NOT invent skills or values. Only use what's provided.
 
 ANSWER STYLE
 - For technical skill questions: explain execution and coaching points only when relevant.
@@ -60,40 +58,9 @@ export async function POST(req: Request) {
     
     // Original Gemini message code
     //const result = await chat.sendMessageStream({ message });
+
     const matchedSkills = findRelevantSkills(message);
 
-    const skillContext = matchedSkills.length
-      ? matchedSkills.map(s => `
-    • **${s.skill}**
-      - Notation: ${s.notation}
-      - Difficulty: ${s.difficulty}
-      - Description: ${s.description}
-    `).join("\n")
-      : "No relevant skill information found.";
-    const skillContext = matchedSkills.length
-      ? matchedSkills.map(s => `
-    • **${s.skill}**
-      - Notation: ${s.notation}
-      - Difficulty: ${s.difficulty}
-      - Description: ${s.description}
-    `).join("\n")
-      : "No relevant skill information found.";
-    const skillContext = matchedSkills.length
-      ? matchedSkills.map(s => `
-    • **${s.skill}**
-      - Notation: ${s.notation}
-      - Difficulty: ${s.difficulty}
-      - Description: ${s.description}
-    `).join("\n")
-      : "No relevant skill information found.";
-    const skillContext = matchedSkills.length
-      ? matchedSkills.map(s => `
-    • **${s.skill}**
-      - Notation: ${s.notation}
-      - Difficulty: ${s.difficulty}
-      - Description: ${s.description}
-    `).join("\n")
-      : "No relevant skill information found.";
     const skillContext = matchedSkills.length
       ? matchedSkills.map(s => `
     • **${s.skill}**
