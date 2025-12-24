@@ -16,7 +16,7 @@ A simple web-based AI chat Next.js app utilising Google's generative AI for resp
 - Styling: Tailwind CSS
 - Language: TypeScript / JavaScript
 - Hosting/Deployment: Vercel
-- Dataset parsing - csv-parse
+- Dataset parsing: csv-parse
 
 ---
 
