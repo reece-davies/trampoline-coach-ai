@@ -1,76 +1,70 @@
 // /lib/skills.ts
 import fs from "fs";
 import path from "path";
+import { parse } from "csv-parse/sync"; // For safe CSV parsing
 
-export type Skill = {
+// Type for a trampoline skill
+export interface Skill {
   skill: string;
   notation: string;
   difficulty: number;
   description: string;
-};
+}
 
+// Caching 
+// Store loaded skills in memory so we don't read/parse CSV on every request
 let cachedSkills: Skill[] | null = null;
 
-// Load skills from CSV file once and cache them.
+// Load all skills from the CSV file
 export function loadSkills(): Skill[] {
-  if (cachedSkills) return cachedSkills;
+  if (cachedSkills) return cachedSkills; // Return cached skills if already loaded
 
   const filePath = path.join(process.cwd(), "data", "skills.csv");
-  const csv = fs.readFileSync(filePath, "utf-8");
+  const csvData = fs.readFileSync(filePath, "utf-8");
 
-  const lines = csv.split("\n").slice(1); // skip header
+  // Parse CSV safely (handles commas inside quoted fields)
+  const records: any[] = parse(csvData, {
+    columns: true,       // Use first row as header
+    skip_empty_lines: true,
+    trim: true,          // Remove extra whitespace
+  });
 
-  cachedSkills = lines
-    .map((line) => {
-      const [skill, notation, difficulty, description] = line.split(",");
-      if (!skill) return null;
-
-      const parsedDifficulty = parseFloat(difficulty);
-      return {
-        skill: skill.trim(),
-        notation: notation?.trim() ?? "",
-        difficulty: isNaN(parsedDifficulty) ? 0 : parsedDifficulty,
-        description: description?.trim() ?? "",
-      };
-    })
-    .filter(Boolean) as Skill[];
+  cachedSkills = records.map((r) => ({
+    skill: r.skill,
+    notation: r.notation,
+    difficulty: parseFloat(r.difficulty), // Ensure numeric difficulty
+    description: r.description,
+  }));
 
   return cachedSkills;
 }
 
-// Find skills mentioned in a question (case-insensitive substring match). (Obsolete)
-/*
-export function findRelevantSkills(question: string): Skill[] {
-  const skills = loadSkills();
-  const q = question.toLowerCase();
-
-  return skills.filter((s) => q.includes(s.skill.toLowerCase()));
-} */
-
-  function normalize(text: string): string {
+// Text normalization
+// Lowercase, remove punctuation and parentheses for matching
+function normalize(text: string): string {
   return text
     .toLowerCase()
-    .replace(/\(.*?\)/g, "") // remove parenthetical text
-    .replace(/[^a-z0-9\s]/g, "") // remove punctuation
+    .replace(/\(.*?\)/g, "") // Remove parenthetical text
+    .replace(/[^a-z0-9\s]/g, "") // Remove other punctuation
     .trim();
 }
 
+// Find relevant skills for a user question
+// Handles:
+// - Aliases separated by "/"
+// - Parenthetical aliases "(Triff Pike)"
 export function findRelevantSkills(question: string): Skill[] {
   const skills = loadSkills();
   const q = normalize(question);
 
   return skills.filter((s) => {
-    const skillName = normalize(s.skill);
+    // Split aliases by "/" and extract parenthetical aliases
+    const aliases = [
+      ...s.skill.split("/").map((a) => normalize(a)),
+      ...(s.skill.match(/\((.*?)\)/g)?.map((a) => normalize(a.replace(/[()]/g, ""))) ?? []),
+    ];
 
-    // Extract aliases inside parentheses, e.g. "(Triff Pike)"
-    const aliases =
-      s.skill.match(/\((.*?)\)/g)?.map(a =>
-        normalize(a.replace(/[()]/g, ""))
-      ) ?? [];
-
-    return (
-      q.includes(skillName) ||
-      aliases.some(alias => q.includes(alias))
-    );
+    // Match if any alias is included in the user question
+    return aliases.some((alias) => q.includes(alias));
   });
 }
